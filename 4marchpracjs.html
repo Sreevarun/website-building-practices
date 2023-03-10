@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="number" id="pid" placeholder="enter the id number"/>
+    <input type="text" id="name" placeholder="enter product name"/>
+    <input type="number" id="price" placeholder="enter product price"/>
+    <button onclick="addProduct()" id="submit">submit</button>
+
+    <ul id="list">
+
+    </ul>
+
+    <script>
+        var products = []
+        function deleteProduct(id){
+            console.log(id);
+            var newList = [];
+            for(var i=0; i<products.length; i++){
+                if(i !== id){
+                    newList.push(products[i])
+                }
+            }
+            products = [...newList];
+            showProduct();
+        }
+        function addProduct(){
+            var pid= document.getElementById("pid").value;
+            var pname= document.getElementById("name").value;
+            var pprice= document.getElementById("price").value;
+            document.getElementById("pid").value="";
+            document.getElementById("name").value="";
+            document.getElementById("price").value="";
+            const newProduct = {
+                pid,
+                pname,
+                pprice
+            }
+            products.push(newProduct)
+
+            showProduct();
+
+        }   
+        function showProduct(){
+            var show = ""
+           console.log(products); 
+                for(var i =0; i<products.length; i++){
+                    console.log(products[i].pname)
+                     show = show+`<li>Id : ${products[i].pid}  Name : ${products[i].pname}   Price : ${products[i].pprice} <button onclick="deleteProduct(${i})" id ="delete">Delete</button> </li>` 
+                    }       
+                    document.getElementById("list").innerHTML=show;
+
+
+        }
+
+
+    </script>
+    
+</body>
+</html>
